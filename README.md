@@ -3,21 +3,21 @@
     * Github URL
     * Project Demo Presentation as Google Slide URL
 Example:
-# Project Title
+# BearcatMan
 ## CS 110 Final Project
-### Semester, Year
+### Fall, 2018
 
 [https://github.com/<repo>](#)
 
 [link to demo presentation slides](#)
 
-### Team:
-#### Team Names
+### Team: Foreman
+#### Nick, Rachael, Shance
 
 ***
 
 ## Project Description
-Give an overview of your project
+Redesigned version of the classic pacman game with a couple of new mechanics and new level designs
 
 ***    
 
@@ -43,15 +43,15 @@ Give an overview of your project
 ## Tasks and Responsibilities
 * You must outline the team member roles and who was responsible for each class/method, both individual and collaborative.
     * Example:
-### Software Lead - [name]
+### Software Lead - Shance
 
 Worked as integration specialist by helping organize the code for the main game into the proper MVC format, which allowed all portions of the code to be run from a single file. He worked very closely with the back end to develop the high-score database functionality, as well as establish the win- and fail-states for the main game. He also lead the implementation of the ‘sprite’ and ‘group’ classes of pygame into the back end code.
 
-### Front End Specialist - [name]
+### Front End Specialist - Nick
 
 Front-end lead conducted significant research on using pygame to create visual aspects such as buttons and on-screen text. She used this information to design and program a consistent UI to help the player navigate the title screen, the instructions page, and the “GAME OVER” screen. In addition to implementing the wide majority of the visual element for the UI, she also collaborated with the Software Lead to create a jukebox function that played music and to add sound effects to the menu navigation buttons.
 
-### Back End Specialist - [name]
+### Back End Specialist - Rachael
 
 The back end specialist helped with the “Model” portion of BLOCKBUSTERS by writing the major classes that would be used in the main game, as well as implementing major pygame functionality into each of them. He also made headway in major game mechanics such as the basic paddle movement and advanced functionality such as the screen-wrap function for the paddle as it approached the ends of the screen. He collaborated with the Front End Specialist in the implementation of the classes into our Controller file, as well as develop our high-score database.
 

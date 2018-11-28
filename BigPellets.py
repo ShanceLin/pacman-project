@@ -1,6 +1,6 @@
-import pygame   
+import pygame
 
-class Pellets(pygame.sprite.Sprite):
+class BigPellets(pygame.sprite.Sprite):
 
     def __init__(self, name, x, y, img):
         pygame.sprite.Sprite.__init__(self)

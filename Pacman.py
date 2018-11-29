@@ -11,6 +11,8 @@ class Pacman(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.savedx = x
+        self.savedy = y
 
         self.name = name + str(id(self))
         self.speed = 5
@@ -27,3 +29,7 @@ class Pacman(pygame.sprite.Sprite):
             self.rect.x -= self.speed
         if (direction == 3):
             self.rect.x += self.speed
+
+    def reset(self):
+        self.rect.x = self.savedx
+        self.rect.y = self.savedy

@@ -14,6 +14,7 @@ import Pacman
 import Ghost
 import Pellets
 import BigPellets
+import Walls
 import random
 
 class Controller:
@@ -28,29 +29,31 @@ class Controller:
         self.pacman = Pacman.Pacman("Pacman", 322, 510, "assets/hero_frame1.png")
         level = 2
 
-        num_ghosts = (1 * level)
         self.ghosts = pygame.sprite.Group()
-        for i in range(num_ghosts):
+        numGhosts = (1 * level)
+        for i in range(numGhosts):
             x = random.randrange(220, 420)
             y = random.randrange(300, 400)
             self.ghosts.add(Ghost.Ghost("Ghosts", x, y, 10, "assets/ghost.gif"))
 
-        num_pellets = 100
         self.pellets = pygame.sprite.Group()
-        for i in range(num_pellets):
+        numPellets = 100
+        for i in range(numPellets):
             self.pellets.add(Pellets.Pellets("Pellets", 200, 200, "assets/dot.png"))
 
-        num_bigpellets = 10
         self.bigpellets = pygame.sprite.Group()
-        for i in range(num_bigpellets):
+        numBigpellets = 10
+        for i in range(numBigpellets):
             self.bigpellets.add(BigPellets.BigPellets("BigPellets", 150, 150, "assets/bigdot.png"))
 
-        num_score = 0
-        roundIsOn = True
-        blueTime = 10
-        ghostIsVulnerable = False
+        self.walls = pygame.sprite.Group()
 
-        self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
+        self.score = 0
+        self.roundIsOn = True
+        self.blueTime = 10
+        self.ghostIsVulnerable = False
+
+        self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls))
         self.state = "GAME"
 
     def mainLoop(self):
@@ -77,7 +80,11 @@ class Controller:
                         self.pacman.move(2)
                     elif (event.key == pygame.K_RIGHT):
                         self.pacman.move(3)
-                        
+
+            #checks for collisions with walls
+
+
+            #checks for ghost vulnerability
             self.screen.blit(self.background, (0, 0))
             for g in self.ghosts:
                 if g.isBlue:
@@ -85,23 +92,23 @@ class Controller:
             getpellet = pygame.sprite.spritecollide(self.pacman, self.pellets, True)
             getBigPellet = pygame.sprite.spritecollide(self.pacman, self.bigpellets, True)
             if getBigPellet:
-                ghostIsVulnerable = True
+                self.ghostIsVulnerable = True
             if len(self.pellets) == 0 & len(self.bigpellets) == 0:
-                roundIsOn = False
+                self.roundIsOn = False
             if (self.pacman.lives == 0):
-                roundIsOn = False
-            
-            #checks for contact betwen ghosts    
-            self.touched = pygame.sprite.spritecollide(self.pacman, self.ghosts, True)
-            if self.touched:
-                if ghostIsVulnerable == False:
+                self.roundIsOn = False
+
+            #checks for contact betwen ghosts
+            touched = pygame.sprite.spritecollide(self.pacman, self.ghosts, True)
+            if touched:
+                if self.ghostIsVulnerable == False:
                     self.pacman.lives -= 1
                     print(self.pacman.lives)
                     print("reset occuring")
                     self.pacman.reset()
-                elif ghostIsVulnerable == True:
+                elif self.ghostIsVulnerable == True:
                     print("Ghost died")
-            self.all_sprites.draw(self.screen)
+            self.allSprites.draw(self.screen)
             pygame.display.flip()
 
             #redraws screen
@@ -109,16 +116,16 @@ class Controller:
             self.screen.blit(self.background, (0, 0))
             if(self.pacman.lives == 0):
                 self.state = "GAMEOVER"
-    
-    def score(self):
-        myfont = pygame.font.SysFont(None, 30)
-        message = myfont.render('Score', False, (0,0,0))
-        pygame.display.blit(text,(0,0))
-        if getpellet:
-            score += 10
-        if getBigPellet:
-            score += 100
-            
+
+            #displays score
+            myfont = pygame.font.SysFont(None, 30)
+            text = myfont.render('SCORE: ', False, (0,0,0))
+            self.screen.blit(text,(600,600))
+            if getpellet:
+                self.score += 10
+            if getBigPellet:
+                self.score += 100
+
     def gameOver(self):
         self.pacman.kill()
         myfont = pygame.font.SysFont(None, 30)

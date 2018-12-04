@@ -1,7 +1,7 @@
 # Cover Page
 ## CS 110 Final Project, Fall Semester, 2018
-### [Github URL]
-### [Project Demo Presentation as Google Slide URL]
+### https://github.com/binghamtonuniversity-cs110/final-project-fall18-foreman
+### https://docs.google.com/presentation/d/12Tb9pJZSVkh1yvmBxMbkxDWFgUyJRNiqf-J5I8sy3Go/edit?usp=sharing
 ***
 ## Team: Foreman
 #### Nick, Rachael, Shance
@@ -30,13 +30,14 @@ Redesigned version of the classic pacman game featuring beloved computer science
         * https://www.pygame.org/
         * A cross platform set of Python modules designed for writing video games, developed by Pete Shinners and the Pygame community. includes crucial graphical elements as well as musical playback functionality
 * Class and File relationships
-    * <insert flow chart here>
+    * ![](class_relations.jpg)
 * List of classes
-    * **Pacman**: A class that defines the pacman, which takes the form of the beloved computer science teacher, Dennis Foreman. The class sets up the speed, lives, and controls for moving the pacman.
-    * **Pellets**: A class that defines the pellets pacman eats to increase the game score. Sets the coordinate each pellet is generated to
-    * **BigPellets**: A class that defines the power pellets pacman eats so he can kill the enemies, eating these increases his score more than the regular pellets do. Also changes the pacman image from Dennis to the terminator. Sets the coordinate each pellet is generated to
-    * **Layout**:
+    * **Pacman**: A class that defines the pacman, which takes the form of the beloved computer science teacher, Dennis Foreman. The class sets up the speed and lives of pacman
+    * **Pellets**: A class that defines the pellets pacman eats to increase the game score
+    * **BigPellets**: A class that defines the power pellets pacman eats so he can kill the enemies, eating these increases his score more than the regular pellets do
     * **Ghost**: A class that defines pacman's enemies, which take the form of <name of ghost> .
+    * **Controller**: Generates number of ghosts, pellets, and power pellets. Has the controls for moving pacman. Contains the function for collisions (such as pacman "dying" when he touches a ghost). Creates the background color.
+    * **walls**:
 ***
 
 ## Tasks and Responsibilities

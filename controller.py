@@ -27,7 +27,7 @@ class Controller:
         pygame.font.init()
 
         self.pacman = Pacman.Pacman("Pacman", 322, 510, "assets/hero_frame1.png")
-        level = 2
+        level = 1
 
         self.ghosts = pygame.sprite.Group()
         numGhosts = (1 * level)
@@ -86,9 +86,9 @@ class Controller:
 
             #checks for ghost vulnerability
             self.screen.blit(self.background, (0, 0))
-            for g in self.ghosts:
-                if g.isBlue:
-                    g.checkIfBlue()
+            # for g in self.ghosts:
+            #     if g.isBlue:
+            #         g.checkIfBlue()
             getpellet = pygame.sprite.spritecollide(self.pacman, self.pellets, True)
             getBigPellet = pygame.sprite.spritecollide(self.pacman, self.bigpellets, True)
             if getBigPellet:
@@ -136,20 +136,3 @@ class Controller:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

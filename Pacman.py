@@ -1,5 +1,4 @@
 import pygame
-import Walls
 
 class Pacman(pygame.sprite.Sprite):
 
@@ -22,7 +21,6 @@ class Pacman(pygame.sprite.Sprite):
 
 
     def moveUp(self):
-        if self.rect.collideRect(Walls.Walls) == False:
             self.rect.y -= self.speed
     def moveDown(self):
         self.rect.y += self.speed
@@ -39,3 +37,19 @@ class Pacman(pygame.sprite.Sprite):
     def LoseScreen(self):
         global YELLOW
         return pygame.font.SysFont (None, 72).render("You Lose", True, YELLOW)
+
+    def returnX(self):
+        return self.rect.x
+
+    def returnY(self):
+        return self.rect.y
+
+    def move(self, direction):
+        if direction == 0:
+            self.rect.top -= self.speed
+        elif direction == 1:
+            self.rect.left -= self.speed
+        elif direction == 2:
+            self.rect.top += self.speed
+        elif direction == 3:
+            self.rect.left += self.speed 

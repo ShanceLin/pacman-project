@@ -69,11 +69,6 @@ class Controller:
 
         self.score = 0
 
-        numBigpellets = 10
-        for i in range(numBigpellets):
-            self.bigpellets.add(BigPellets.BigPellets("BigPellets", 150, 150, "assets/bigdot.png"))
-
-        self.walls = Walls.Walls()
 
         self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
         self.state = "GAME"

@@ -1,4 +1,5 @@
 import pygame
+import Walls
 
 class Pacman(pygame.sprite.Sprite):
 
@@ -21,7 +22,8 @@ class Pacman(pygame.sprite.Sprite):
 
 
     def moveUp(self):
-        self.rect.y -= self.speed
+        if self.rect.collideRect(Walls.Walls) == False:
+            self.rect.y -= self.speed
     def moveDown(self):
         self.rect.y += self.speed
     def moveLeft(self):
@@ -32,6 +34,7 @@ class Pacman(pygame.sprite.Sprite):
     def reset(self):
         self.rect.x = self.savedx
         self.rect.y = self.savedy
+
 
     def LoseScreen(self):
         global YELLOW

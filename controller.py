@@ -31,7 +31,7 @@ class Controller:
         level = 1
 
         self.ghosts = pygame.sprite.Group()
-        numGhosts = (1 * level)
+        numGhosts = (2 * level)
         ghostspeed = 10
         for k in range(numGhosts):
             x = random.randrange(275, 350)
@@ -145,7 +145,10 @@ class Controller:
                         self.pacman.moveRight()
 
             #checks for collisions with walls
-
+            for i in self.walls:
+                if self.pacman.rect.bottom > self.i.rect.top:
+                    overlap = self.pacman.rect.bottom - self.i.rect.top
+                    self.pacman.rect.bottom -= overlap
 
             #checks for ghost vulnerability
             self.screen.blit(self.background, (0, 0))

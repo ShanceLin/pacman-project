@@ -145,10 +145,6 @@ class Controller:
                         self.pacman.moveRight()
 
             #checks for collisions with walls
-            for i in self.walls:
-                if self.pacman.rect.bottom > self.i.rect.top:
-                    overlap = self.pacman.rect.bottom - self.i.rect.top
-                    self.pacman.rect.bottom -= overlap
 
             #checks for ghost vulnerability
             self.screen.blit(self.background, (0, 0))

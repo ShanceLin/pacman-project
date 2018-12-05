@@ -44,7 +44,7 @@ class Controller:
             pelletcount +=1
         print(pelletcount)
         self.bigpellets = pygame.sprite.Group()
-<<<<<<< HEAD
+
         bigpelletlocations = ((25,75),(600,75), (25, 525), (600,525))
         for z in bigpelletlocations:
             self.bigpellets.add(BigPellets.BigPellets("BigPellets", "assets/bigdot.png", z))
@@ -68,7 +68,7 @@ class Controller:
         #theres 478 walls rip
 
         self.score = 0
-=======
+
         numBigpellets = 10
         for i in range(numBigpellets):
             self.bigpellets.add(BigPellets.BigPellets("BigPellets", 150, 150, "assets/bigdot.png"))
@@ -80,7 +80,7 @@ class Controller:
 
 
         self.font = pygame.font.SysFont("Times New Roman", 25)
->>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
+
         self.roundIsOn = True
         self.blueTime = 10
         self.ghostIsVulnerable = False
@@ -170,18 +170,16 @@ class Controller:
                     self.pacman.lives -= 1
                     print(self.pacman.lives)
                     print("reset occuring")
-<<<<<<< HEAD
+
                     self.pacman.reset()
-=======
+
                     self.all_sprites.update()
->>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
+
                 elif self.ghostIsVulnerable == True:
                     print("Ghost died")
             self.allSprites.draw(self.screen)
             pygame.display.flip()
 
-<<<<<<< HEAD
-=======
             #displays score
             myfont = pygame.font.SysFont(None, 30)
             text = "%5d Points %2d Lifes" % (0, self.pacman.lives)
@@ -193,7 +191,7 @@ class Controller:
             if getBigPellet:
                 self.score += 100
 
->>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
+
             #redraws screen
             self.ghosts.update()
             self.screen.blit(self.background, (0, 0))

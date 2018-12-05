@@ -44,6 +44,7 @@ class Controller:
             pelletcount +=1
         print(pelletcount)
         self.bigpellets = pygame.sprite.Group()
+<<<<<<< HEAD
         bigpelletlocations = ((25,75),(600,75), (25, 525), (600,525))
         for z in bigpelletlocations:
             self.bigpellets.add(BigPellets.BigPellets("BigPellets", "assets/bigdot.png", z))
@@ -67,6 +68,19 @@ class Controller:
         #theres 478 walls rip
 
         self.score = 0
+=======
+        numBigpellets = 10
+        for i in range(numBigpellets):
+            self.bigpellets.add(BigPellets.BigPellets("BigPellets", 150, 150, "assets/bigdot.png"))
+
+        self.walls = Walls.Walls()
+
+        self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
+        self.state = "GAME"
+
+
+        self.font = pygame.font.SysFont("Times New Roman", 25)
+>>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
         self.roundIsOn = True
         self.blueTime = 10
         self.ghostIsVulnerable = False
@@ -80,6 +94,39 @@ class Controller:
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
+
+    def text_objects(text, font):
+        textSurface = font.render(text, True, black)
+        return textSurface, textSurface.get_rect()
+
+    def messageDisplay(text):
+        largeText = pygame.font.Font('Times New Roman',115)
+        TextSurf, TextRect = text_objects(text, largeText)
+        TextRect.center = ((display_width/2),(display_height/2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        pygame.display.update()
+
+        time.sleep(2)
+
+        game_loop()
+
+    def gameIntro():
+        intro = True
+        while intro:
+            for event in pygame.event.get():
+                print(event)
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            gameDisplay.fill(white)
+            largeText = pygame.font.Font('Times New Roman',115)
+            TextSurf, TextRect = text_objects("FOREMAN", largeText)
+            TextRect.center = ((display_width/2),(display_height/2))
+            gameDisplay.blit(TextSurf, TextRect)
+            pygame.display.update()
+            clock.tick(15)
 
     def gameLoop(self):
         #main loop of game
@@ -123,12 +170,30 @@ class Controller:
                     self.pacman.lives -= 1
                     print(self.pacman.lives)
                     print("reset occuring")
+<<<<<<< HEAD
                     self.pacman.reset()
+=======
+                    self.all_sprites.update()
+>>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
                 elif self.ghostIsVulnerable == True:
                     print("Ghost died")
             self.allSprites.draw(self.screen)
             pygame.display.flip()
 
+<<<<<<< HEAD
+=======
+            #displays score
+            myfont = pygame.font.SysFont(None, 30)
+            text = "%5d Points %2d Lifes" % (0, self.pacman.lives)
+            text_img = self.font.render(text, True, (100, 100, 0))
+            self.screen.blit(text_img, (0, 0))
+
+            if getpellet:
+                self.score += 10
+            if getBigPellet:
+                self.score += 100
+
+>>>>>>> b36292ac6d3cf1199a701787759228f11487a0d0
             #redraws screen
             self.ghosts.update()
             self.screen.blit(self.background, (0, 0))

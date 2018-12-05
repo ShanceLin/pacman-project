@@ -2,7 +2,7 @@ import pygame
 
 class Pacman(pygame.sprite.Sprite):
 
-    def __init__(self, name, x, y, img):
+    def __init__(self, name, x, y, img, speed):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = pygame.image.load(img).convert_alpha()
@@ -15,21 +15,24 @@ class Pacman(pygame.sprite.Sprite):
         self.savedy = y
 
         self.name = name + str(id(self))
-        self.speed = 5
+        self.speed = speed
         self.direction = 0
         self.lives = 3
 
 
-    def move(self, direction):
-        if (direction == 0):
-            self.rect.y -= self.speed
-        if (direction == 1):
-            self.rect.y += self.speed
-        if (direction == 2):
-            self.rect.x -= self.speed
-        if (direction == 3):
-            self.rect.x += self.speed
+    def moveUp(self):
+        self.rect.y -= self.speed
+    def moveDown(self):
+        self.rect.y += self.speed
+    def moveLeft(self):
+        self.rect.x -= self.speed
+    def moveRight(self):
+        self.rect.x += self.speed
 
     def reset(self):
         self.rect.x = self.savedx
         self.rect.y = self.savedy
+
+    def LoseScreen(self):
+        global YELLOW
+        return pygame.font.SysFont (None, 72).render("You Lose", True, YELLOW)

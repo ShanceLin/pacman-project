@@ -38,7 +38,7 @@ class Controller:
 
         self.walls = Walls.Walls()
 
-        self.all_sprites = pygame.sprite.Group((self.pacman, self.walls,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
+        self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
         self.state = "GAME"
 
 
@@ -53,6 +53,39 @@ class Controller:
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
+
+    def text_objects(text, font):
+        textSurface = font.render(text, True, black)
+        return textSurface, textSurface.get_rect()
+
+    def messageDisplay(text):
+        largeText = pygame.font.Font('Times New Roman',115)
+        TextSurf, TextRect = text_objects(text, largeText)
+        TextRect.center = ((display_width/2),(display_height/2))
+        gameDisplay.blit(TextSurf, TextRect)
+
+        pygame.display.update()
+
+        time.sleep(2)
+
+        game_loop()
+
+    def gameIntro():
+        intro = True
+        while intro:
+            for event in pygame.event.get():
+                print(event)
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
+            gameDisplay.fill(white)
+            largeText = pygame.font.Font('Times New Roman',115)
+            TextSurf, TextRect = text_objects("FOREMAN", largeText)
+            TextRect.center = ((display_width/2),(display_height/2))
+            gameDisplay.blit(TextSurf, TextRect)
+            pygame.display.update()
+            clock.tick(15)
 
     def gameLoop(self):
         #main loop of game
@@ -95,9 +128,9 @@ class Controller:
             if touched:
                 if self.ghostIsVulnerable == False:
                     self.pacman.lives -= 1
-                    print(self.lives)
+                    print(self.pacman.lives)
                     print("reset occuring")
-                    self.all_sprites.reset()
+                    self.all_sprites.update()
                 elif self.ghostIsVulnerable == True:
                     print("Ghost died")
             self.all_sprites.draw(self.screen)
@@ -105,9 +138,9 @@ class Controller:
 
             #displays score
             myfont = pygame.font.SysFont(None, 30)
-            text = "%5d Points %2d Lifes" % (self.pacman.pellets, self.player.lives)
+            text = "%5d Points %2d Lifes" % (0, self.pacman.lives)
             text_img = self.font.render(text, True, (100, 100, 0))
-            self.surface.blit(text_img, (0, 0))
+            self.screen.blit(text_img, (0, 0))
 
             if getpellet:
                 self.score += 10

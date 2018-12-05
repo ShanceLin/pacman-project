@@ -1,27 +1,39 @@
 import pygame
+import Walls
 
 class Pacman(pygame.sprite.Sprite):
 
     def __init__(self, name, x, y, img, speed):
         pygame.sprite.Sprite.__init__(self)
-
-        self.image = pygame.image.load(img).convert_alpha()
-
+        self.image = pygame.image.load("assets/foreman2.png").convert_alpha()
         self.surface = self.image
+        self.FirstPic = True
+        self.frame = 0
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
         self.savedx = x
         self.savedy = y
+        self.direction = 3
 
         self.name = name + str(id(self))
         self.speed = speed
-        self.direction = 0
+        self.direction = 3
         self.lives = 3
 
+    # def getSurface(self):
+    #     if self.direction == 0:
+    #         self.image = pygame.image
+    #     elif self.direction == 1:
+    #         self.image = pygame.transform.rotate (self.images, 90)
+    #     elif self.direction == 2:
+    #         self.image = pygame.transform.rotate (self.image, 180)
+    #     elif self.direction == 3:
+    #        print(self.direction)
+    #        self.image = pygame.transform.rotate (self.image, 270)
 
     def moveUp(self):
-            self.rect.y -= self.speed
+        self.rect.y -= self.speed
     def moveDown(self):
         self.rect.y += self.speed
     def moveLeft(self):
@@ -52,4 +64,16 @@ class Pacman(pygame.sprite.Sprite):
         elif direction == 2:
             self.rect.top += self.speed
         elif direction == 3:
-            self.rect.left += self.speed 
+            self.rect.left += self.speed
+
+    def canMove(self, direction):
+        canmovex = self.rect.x
+        canmovey = self.rect.y
+        #if self.rect.colliderect()
+        if direction == 0:
+            if (canmovex, canmovey - self.speed) in Walls.Walls.allwalls():
+                return False
+            return True
+
+    def returnRect(self):
+        return self.rect

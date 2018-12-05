@@ -18,15 +18,14 @@ import Walls
 import random
 
 class Controller:
-    def __init__(self, width=650, height=825):
+    def __init__(self, width=750, height=825):
         self.width = width
         self.height = height
         self.screen = pygame.display.set_mode((self.width, self.height))
         self.background = pygame.Surface(self.screen.get_size()).convert()
         self.clock = pygame.time.Clock()
         pygame.font.init()
-
-        self.pacmanspeed = 5
+        self.pacmanspeed = 6.25
         self.pacman = Pacman.Pacman("Pacman", 325, 525, "assets/foreman1.png", self.pacmanspeed)
         level = 1
 
@@ -51,24 +50,11 @@ class Controller:
             self.bigpellets.add(BigPellets.BigPellets("BigPellets", "assets/bigdot.png", z))
 
         self.walls = pygame.sprite.Group()
-
-        for q in Walls.Walls.leftwall():
-            self.walls.add(Walls.Walls("assets/wall.png", q))
-
-        for e in Walls.Walls.topwall():
-            self.walls.add(Walls.Walls("assets/wall.png", e))
-
-        for w in Walls.Walls.rightwall():
-            self.walls.add(Walls.Walls("assets/wall.png", w))
-
-        for t in Walls.Walls.bottomwall():
-            self.walls.add(Walls.Walls("assets/wall.png", t))
-        for y in Walls.Walls.otherwalls():
+        for y in Walls.Walls.allwalls():
             self.walls.add(Walls.Walls("assets/wall.png", y))
         #theres 478 walls rip
 
         self.score = 0
-
 
         self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
         self.state = "GAME"
@@ -82,8 +68,9 @@ class Controller:
 
         self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls))
         self.state = "GAME"
-
-
+        self.z = 0
+        self.ghostKill = False
+        self.colliding = False
 
     def mainLoop(self):
         while True:
@@ -129,7 +116,7 @@ class Controller:
         #main loop of game
         pygame.key.set_repeat(1,50)
         while self.state == "GAME":
-            self.background.fill((250, 250, 250))
+            self.background.fill((0, 0, 0))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -148,6 +135,8 @@ class Controller:
 
 
             #checks for ghost vulnerability
+            #self.pacman.getSurface()
+
             self.screen.blit(self.background, (0, 0))
             for g in self.ghosts:
                 if g.isBlue:
@@ -162,7 +151,8 @@ class Controller:
                 self.roundIsOn = False
 
             #checks for contact betwen ghosts
-            touched = pygame.sprite.spritecollide(self.pacman, self.ghosts, True)
+
+            touched = pygame.sprite.spritecollide(self.pacman, self.ghosts, self.ghostKill)
             if touched:
                 if self.ghostIsVulnerable == False:
                     self.pacman.lives -= 1
@@ -174,6 +164,7 @@ class Controller:
                     self.all_sprites.update()
 
                 elif self.ghostIsVulnerable == True:
+                    self.ghostKill = True
                     print("Ghost died")
             self.allSprites.draw(self.screen)
             pygame.display.flip()

@@ -20,7 +20,7 @@ class Pacman(pygame.sprite.Sprite):
         self.speed = speed
         self.direction = 3
         self.lives = 3
-        self.score = 0 
+        self.score = 0
 
     # def getSurface(self):
     #     if self.direction == 0:
@@ -34,25 +34,60 @@ class Pacman(pygame.sprite.Sprite):
     #        self.image = pygame.transform.rotate (self.image, 270)
 
     def moveUp(self):
+        """
+        moves character up
+        args: None
+        return: None
+        """
         self.rect.y -= self.speed
     def moveDown(self):
+        """
+        moves character down
+        args: None
+        return: None
+        """
         self.rect.y += self.speed
     def moveLeft(self):
+        """
+        moves character left
+        args: None
+        return: None
+        """
         self.rect.x -= self.speed
     def moveRight(self):
+        """
+        moves character right
+        args: None
+        return: None
+        """
         self.rect.x += self.speed
 
     def reset(self):
+        """
+        resets character position
+        args: None
+        return: None
+        """
         self.rect.x = self.savedx
         self.rect.y = self.savedy
 
 
     def LoseScreen(self):
+        """
+        creates the screen that pops up when the player loses the game
+        args: None
+        return: pygame.font.SysFont (None, 72).render("You Lose", True, YELLOW)
+        """
         global YELLOW
         return pygame.font.SysFont (None, 72).render("You Lose", True, YELLOW)
 
 
     def canMove(self, direction):
+        """
+        makes sure that pacman doesnt go through Walls
+        args: direction
+        return: True and False booleons based on movement
+        """
         canmovex = self.rect.x
         canmovey = self.rect.y
         #if self.rect.colliderect()
@@ -74,5 +109,10 @@ class Pacman(pygame.sprite.Sprite):
             return True
 
     def getScore(self):
+        """
+        Creates the game Score
+        args: None
+        return: pygame.font.SysFont (None, 48). render ("Score: " + str (self.score), True, YELLOW)
+        """
         global YELLOW
         return pygame.font.SysFont (None, 48). render ("Score: " + str (self.score), True, YELLOW)

@@ -9,14 +9,14 @@
 ***
 
 ## Project Description
-Redesigned version of the classic pacman game featuring beloved computer science teacher, Dennis Foreman, as the packman, and <whoever the ghose is> as the ghost. pacman is a game in which the pacman's goal is to eat all of its food pellets without being touched by the ghosts, each pellet adds to the pacman's score. If the pacman eats a power pellet, it then has the ability to eat the ghost, giving it more points.
+Redesigned version of the classic pacman game featuring beloved computer science teacher, Dennis Foreman, as the packman, and ferraris as the ghosts. pacman is a game in which the pacman's goal is to eat all of its food pellets without being touched by the ghosts, each pellet adds to the pacman's score. If the pacman eats a power pellet, it then has the ability to eat the ghost, giving it more points.
 ***    
 
 ## User Interface Design
 * Main menu/ Start Screen
-    * This screen is the first thing that the user sees, displaying the name "Pacman" and allowing the play to press the "start game" button, or "quit" button. Click "instructions" to learn how the game is played
+    * This screen is the first thing that the user sees, displaying "start game and allowing the player to press the "start game" button, or "instructions" button. Click "instructions" to learn how the game is played
 * Instructions Screen
-    * The screen tells the user how to play and the controls for the game. From here the user can press "back" to return to the main menu
+    * The screen tells the user how to play and the controls for the game. From here the user can press "b" to return back to the main menu
 * The Game Menu
     * Screen where the actual game of pacman takes place, using the arrow keys you can move the packman around and play the game like it tells you in the instructions screen. Once all the pellets are eaten the game will proceed to the next level, and the score will continue to increase. The game is "over" when the pacman loses all three of its lives, which happens when the ghosts touch it.
 * Game Over Menu
@@ -35,23 +35,23 @@ Redesigned version of the classic pacman game featuring beloved computer science
     * **Pacman**: A class that defines the pacman, which takes the form of the beloved computer science teacher, Dennis Foreman. The class sets up the speed and lives of pacman
     * **Pellets**: A class that defines the pellets pacman eats to increase the game score
     * **BigPellets**: A class that defines the power pellets pacman eats so he can kill the enemies, eating these increases his score more than the regular pellets do
-    * **Ghost**: A class that defines pacman's enemies, which take the form of <name of ghost> .
+    * **Ghost**: A class that defines pacman's enemies, which take the form of ferraris.
     * **Controller**: Generates number of ghosts, pellets, and power pellets. Has the controls for moving pacman. Contains the function for collisions (such as pacman "dying" when he touches a ghost). Creates the background color.
-    * **walls**:
+    * **walls**: creates the walls which serve as boundaries for pacman
 ***
 
 ## Tasks and Responsibilities
 * Software Lead - Rachael
-    * Arranged group meetings to make sure the front and back end specialist were both on the same page and working on their code in a timely fashion. Also wrote up the ATP, README, and presentation slides.
+    * Arranged group meetings to make sure the front and back end specialist were both on the same page and working on their code in a timely fashion. Also wrote up the ATP, README, and presentation slides. Assisted in writing some of the code
 * Front End Specialist - Nick
-    * Front-end lead conducted research on using pygame to create visual aspects such as buttons and on-screen text. He used this information to design and program a consistent UI to help the player navigate the title screen, the instructions page, and the “GAME OVER” screen. In addition to implementing the wide majority of the visual element for the UI, he also collaborated with the backend to index into images and change them with certain parts of the gameplay
+    * Front-end lead conducted research on using pygame to create visual aspects such as making dennis pacman and on-screen text. He used this information to design and program a consistent UI to help the player navigate the title screen, the instructions page, and the “GAME OVER” screen. In addition to implementing the wide majority of the visual element for the UI, he also collaborated with the backend to index into images and change them with certain parts of the gameplay
 * Back End Specialist - Shance
     * The back end specialist helped with the “Model” portion of pacman by writing all of the major classes that would be used in the main game, as well as implementing major pygame functionality into each of them. He also made headway in major game mechanics such as the basic pacman movement and advanced functionality such as the pacman having wall boundaries. He collaborated with the Front End Specialist in the implementation of the classes into our Controller file, as well as develop the ability to have and increase the players score.
 ***
 
 ## Testing
 * Menu Testing
-    * First we run python3 main.py and check that all of GUIs on our main screen work. Like being able to go to the instructions screen and then back to the main. Then we run the game and lose on purpose to make sure that the end game window pops up. Then we play again, pressing the "play again" button on the game over menu and win on purpose to make sure the level changes. We make sure that the quit buttons on every window work properly
+    * First we run python3 main.py and check that all of GUIs on our main screen work. Like being able to go to the instructions screen and then back to the game. Then we run the game and lose on purpose to make sure that the end game window pops up. Then we play again, pressing the "play again" button on the game over menu and win on purpose to make sure the level changes.
 * Game Testing
     * We run the game testing out the controls making the pacman move around using the up, down, left, right arrow keys. Then we make the pacman run into a wall to make sure the boundaries are working properly. Then we test the gameplay, making the pacman eat pellets seeing that the score increases, then we eat a power pellet to make sure pacman changes images and is able to now eat the ghost (also increasing its score by more points).
 

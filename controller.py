@@ -88,8 +88,8 @@ class Controller:
         fontTitle = pygame.font.SysFont("helvetica", 72)
         fontOther = pygame.font.SysFont("helvectica", 52)
         title = fontTitle.render("FOREMAN", True, (0, 0, 0))
-        start = fontOther.render("Press ENTER to start", True, (0, 0, 0))
-        instructions = fontOther.render("press I for instructions", True, (0, 0, 0))
+        start = fontOther.render("click X to start", True, (0, 0, 0))
+        instructions = fontOther.render("use ARROWKEYS to move", True, (0, 0, 0))
 
         while not done:
             for event in pygame.event.get():
@@ -102,12 +102,6 @@ class Controller:
             screen.blit(title, (200, 150))
             screen.blit(start, (120, 250))
             screen.blit(instructions, (200, 350))
-            if event.type == pygame.KEYDOWN:
-                if(event.key == pygame.K_i):
-                    instructions = fontOther.render("press I for instructions", True, (0, 0, 0))
-                    screen.blit(quit, (200, 350))
-                    pygame.display.flip()
-
             pygame.display.flip()
             clock.tick(60)
 

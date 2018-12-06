@@ -7,3 +7,11 @@ class livesRemaining(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+    def Vulnerable(self):
+        self.rect.x = 675
+        self.rect.y = 50
+
+    def resetVul(self):
+        self.rect.x = 7000
+        self.rect.y = 7000

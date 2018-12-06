@@ -18,8 +18,6 @@ import Walls
 import random
 <<<<<<< HEAD
 import Lives
-=======
->>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
 
 class Controller:
     def __init__(self, width=750, height=825):
@@ -154,10 +152,8 @@ class Controller:
                 elif self.ghostIsVulnerable == True:
                     self.ghostKill = True
                     print("Ghost died")
-<<<<<<< HEAD
 
             #redraws screen
-=======
             self.allSprites.draw(self.screen)
             pygame.display.flip()
 
@@ -170,13 +166,12 @@ class Controller:
             if getBigPellet:
                 self.score += 100
 
->>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
             self.ghosts.update()
             self.screen.blit(self.background, (0, 0))
             if(self.pacman.lives == 0):
                 self.state = "GAMEOVER"
 
-<<<<<<< HEAD
+
             #displays score
             myfont = pygame.font.SysFont(None, 30)
             text = myfont.render('SCORE: ', True, (0,0,0))
@@ -189,8 +184,7 @@ class Controller:
             self.allSprites.draw(self.screen)
             pygame.display.flip()
 
-=======
->>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
+
     def gameOver(self):
         self.pacman.kill()
         myfont = pygame.font.SysFont(None, 30)

@@ -20,6 +20,7 @@ class Pacman(pygame.sprite.Sprite):
         self.speed = speed
         self.direction = 3
         self.lives = 3
+        self.score = 0 
 
     # def getSurface(self):
     #     if self.direction == 0:
@@ -50,12 +51,6 @@ class Pacman(pygame.sprite.Sprite):
         global YELLOW
         return pygame.font.SysFont (None, 72).render("You Lose", True, YELLOW)
 
-    def returnX(self):
-        return self.rect.x
-
-    def returnY(self):
-        return self.rect.y
-
 
     def canMove(self, direction):
         canmovex = self.rect.x
@@ -77,16 +72,7 @@ class Pacman(pygame.sprite.Sprite):
             if (canmovex + self.speed, canmovey) in Walls.Walls.allwalls():
                 return False
             return True
-    def returnRect(self):
-        return self.rect
 
-    def returnSpeed(self):
-        return self.speed
-
-    def teleright(self):
-        if self.rect.x == 0 & self.rect.y == 325:
-            self.rect.x = 600
-
-    def teleleft(self):
-        if self.rect.x == 0 & self.rect.y == 600:
-            self.rect.x = 0
+    def getScore(self):
+        global YELLOW
+        return pygame.font.SysFont (None, 48). render ("Score: " + str (self.score), True, YELLOW)

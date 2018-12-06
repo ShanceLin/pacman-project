@@ -16,6 +16,7 @@ import Pellets
 import BigPellets
 import Walls
 import random
+import Lives
 
 class Controller:
     def __init__(self, width=750, height=825):
@@ -31,13 +32,12 @@ class Controller:
 
         self.ghosts = pygame.sprite.Group()
         numGhosts = (2 * level)
-        ghostspeed = 10
+        ghostspeed = 25
         for k in range(numGhosts):
             x = random.randrange(275, 350)
             self.ghosts.add(Ghost.Ghost("Ghosts", x, 325, ghostspeed, "assets/carsprite.png"))
         #pelletcount = 0
         self.pellets = pygame.sprite.Group()
-
 
         for p in Pellets.Pellets.pelletlocations():
             self.pellets.add(Pellets.Pellets("Pellets", "assets/dot.png", p))
@@ -53,12 +53,9 @@ class Controller:
         for y in Walls.Walls.allwalls():
             self.walls.add(Walls.Walls("assets/wall.png", y))
         #theres 478 walls rip
-
-        self.score = 0
-
-        self.all_sprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets))
-        self.state = "GAME"
-
+        self.livesRemaining = pygame.sprite.Group()
+        for i in range(self.pacman.lives):
+            self.livesRemaining.add(Lives.livesRemaining(i*20+675, 10, 'assets/foreman1.png'))
 
         self.font = pygame.font.SysFont("Times New Roman", 25)
 
@@ -66,7 +63,7 @@ class Controller:
         self.blueTime = 10
         self.ghostIsVulnerable = False
 
-        self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls))
+        self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls) + tuple(self.livesRemaining))
         self.state = "GAME"
         self.z = 0
         self.ghostKill = False
@@ -124,12 +121,6 @@ class Controller:
                         if self.pacman.canMove(3) == True:
                             self.pacman.moveRight()
 
-
-            #checks for collisions with walls
-
-            #checks for ghost vulnerability
-            #self.pacman.getSurface()
-
             self.screen.blit(self.background, (0, 0))
             for g in self.ghosts:
                 if g.isBlue:
@@ -143,36 +134,19 @@ class Controller:
             if (self.pacman.lives == 0):
                 self.roundIsOn = False
 
-            #checks for contact betwen ghosts
-
             touched = pygame.sprite.spritecollide(self.pacman, self.ghosts, self.ghostKill)
             if touched:
                 if self.ghostIsVulnerable == False:
                     self.pacman.lives -= 1
-                    print(self.pacman.lives)
-                    print("reset occuring")
-
+                    lives = self.livesRemaining.sprites()
+                    lives[0].kill()
                     self.pacman.reset()
 
-                    self.all_sprites.update()
+                    self.allSprites.update()
 
                 elif self.ghostIsVulnerable == True:
                     self.ghostKill = True
                     print("Ghost died")
-            self.allSprites.draw(self.screen)
-            pygame.display.flip()
-
-            #displays score
-            myfont = pygame.font.SysFont(None, 30)
-            text = "%5d Points %2d Lifes" % (0, self.pacman.lives)
-            text_img = self.font.render(text, True, (100, 100, 0))
-            self.screen.blit(text_img, (0, 0))
-
-            if getpellet:
-                self.score += 10
-            if getBigPellet:
-                self.score += 100
-
 
             #redraws screen
             self.ghosts.update()
@@ -185,9 +159,12 @@ class Controller:
             text = myfont.render('SCORE: ', True, (0,0,0))
             self.screen.blit(text,(600,600))
             if getpellet:
-                self.score += 10
+                self.pacman.score += 10
             if getBigPellet:
-                self.score += 10
+                self.pacman.score += 10
+
+            self.allSprites.draw(self.screen)
+            pygame.display.flip()
 
     def gameOver(self):
         self.pacman.kill()

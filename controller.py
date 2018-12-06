@@ -65,39 +65,23 @@ class Controller:
         self.score = 0
 
     def mainLoop(self):
+        """
+        This is the main loop of the game
+        arg: self
+        return: None
+        """
         while True:
             if(self.state == "GAME"):
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
 
-    def gameIntro():
-        pygame.init()
-        screen = pygame.display.set_mode((640, 480))
-        clock = pygame.time.Clock()
-        done = False
-
-        fontTitle = pygame.font.SysFont("helvetica", 72)
-        fontOther = pygame.font.SysFont("helvectica", 52)
-        title = fontTitle.render("FOREMAN", True, (0, 0, 0))
-        start = fontOther.render("click X to start", True, (0, 0, 0))
-        instructions = fontOther.render("use ARROWKEYS to move", True, (0, 0, 0))
-
-        while not done:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    done = True
-                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
-                    done = True
-
-            screen.fill((15, 9, 119))
-            screen.blit(title, (200, 150))
-            screen.blit(start, (120, 250))
-            screen.blit(instructions, (200, 350))
-            pygame.display.flip()
-            clock.tick(60)
-
     def gameLoop(self):
+        """
+        This is the main loop of the game. This checks for sprite collisions, updates sprites, redraws the screen, etc.
+        arg: self
+        return: None
+        """
         #main loop of game
         pygame.key.set_repeat(1,50)
         while self.state == "GAME":
@@ -191,6 +175,11 @@ class Controller:
 
 
     def gameOver(self):
+        """
+        Infinite loop that will end the game and exit the system
+        arg: self
+        return: None
+        """
         self.pacman.kill()
         self.background.fill((0, 0, 0))
         myfont = pygame.font.SysFont(None, 100)

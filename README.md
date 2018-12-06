@@ -21,7 +21,9 @@ Redesigned version of the classic pacman game featuring beloved computer science
     * Screen where the actual game of pacman takes place, using the arrow keys you can move the packman around and play the game like it tells you in the instructions screen. Once all the pellets are eaten the game will proceed to the next level, and the score will continue to increase. The game is "over" when the pacman loses all three of its lives, which happens when the ghosts touch it.
 * Game Over Menu
     * This screen appears when pacman loses all of its three lives, and displays the message "GAME OVER" and gives the option to click "play again" or "quit"
-<paste each screen menu here>
+* final GUI interface
+    * ![](introScreen.png)
+    * ![](gameScreen.png)
 ***        
 
 ## Program Design

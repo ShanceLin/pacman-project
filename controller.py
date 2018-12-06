@@ -16,10 +16,6 @@ import Pellets
 import BigPellets
 import Walls
 import random
-import InvisibleTop
-import InvisibleBottom
-import InvisibleLeft
-import InvisibleRight
 
 class Controller:
     def __init__(self, width=750, height=825):

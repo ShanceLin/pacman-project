@@ -82,3 +82,11 @@ class Pacman(pygame.sprite.Sprite):
 
     def returnSpeed(self):
         return self.speed
+
+    def teleright(self):
+        if self.rect.x == 0 & self.rect.y == 325:
+            self.rect.x = 600
+
+    def teleleft(self):
+        if self.rect.x == 0 & self.rect.y == 600:
+            self.rect.x = 0

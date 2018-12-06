@@ -29,14 +29,9 @@ class Controller:
         self.background = pygame.Surface(self.screen.get_size()).convert()
         self.clock = pygame.time.Clock()
         pygame.font.init()
-        self.pacmanspeed = 6.25
+        self.pacmanspeed = 25
         self.pacman = Pacman.Pacman("Pacman", 325, 525, "assets/foreman1.png", self.pacmanspeed)
         level = 1
-
-        self.InvisibleTop = InvisibleTop.InvisibleTop(self.pacmanspeed)
-        self.InvisibleBottom = InvisibleBottom.InvisibleBottom(self.pacmanspeed)
-        self.InvisibleLeft = InvisibleLeft.InvisibleLeft(self.pacmanspeed)
-        self.InvisibleRight = InvisibleRight.InvisibleRight(self.pacmanspeed)
 
         self.ghosts = pygame.sprite.Group()
         numGhosts = (2 * level)
@@ -75,7 +70,7 @@ class Controller:
         self.blueTime = 10
         self.ghostIsVulnerable = False
 
-        self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls) + (self.InvisibleTop,) + (self.InvisibleBottom,) + (self.InvisibleLeft,) + (self.InvisibleRight,))
+        self.allSprites = pygame.sprite.Group((self.pacman,) + tuple(self.ghosts) + tuple(self.pellets) + tuple(self.bigpellets) + tuple(self.walls))
         self.state = "GAME"
         self.z = 0
         self.ghostKill = False
@@ -132,31 +127,18 @@ class Controller:
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if (event.key == pygame.K_UP):
-                        for n in self.walls:
-                            if self.InvisibleTop.rect.colliderect(n):
-                                self.pacman.moveUp()
-                                self.InvisibleTop.moveUp()
-                                self.InvisibleBottom.moveUp()
-                                self.InvisibleLeft.moveUp()
-                                self.InvisibleRight.moveUp()
+                        if self.pacman.canMove(0) == True:
+                            self.pacman.moveUp()
                     elif (event.key == pygame.K_DOWN):
-                        self.pacman.moveDown()
-                        self.InvisibleTop.moveDown()
-                        self.InvisibleBottom.moveDown()
-                        self.InvisibleLeft.moveDown()
-                        self.InvisibleRight.moveDown()
+                        if self.pacman.canMove(1) == True:
+                            self.pacman.moveDown()
                     elif (event.key == pygame.K_LEFT):
-                        self.pacman.moveLeft()
-                        self.InvisibleTop.moveLeft()
-                        self.InvisibleBottom.moveLeft()
-                        self.InvisibleRight.moveLeft()
-                        self.InvisibleLeft.moveLeft()
+                        if self.pacman.canMove(2) == True:
+                            self.pacman.moveLeft()
                     elif (event.key == pygame.K_RIGHT):
-                        self.pacman.moveRight()
-                        self.InvisibleTop.moveRight()
-                        self.InvisibleLeft.moveRight()
-                        self.InvisibleRight.moveRight()
-                        self.InvisibleBottom.moveRight()
+                        if self.pacman.canMove(3) == True:
+                            self.pacman.moveRight()
+
 
             #checks for collisions with walls
 

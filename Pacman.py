@@ -56,6 +56,27 @@ class Pacman(pygame.sprite.Sprite):
     def returnY(self):
         return self.rect.y
 
+
+    def canMove(self, direction):
+        canmovex = self.rect.x
+        canmovey = self.rect.y
+        #if self.rect.colliderect()
+        if direction == 0:
+            if (canmovex, canmovey - self.speed) in Walls.Walls.allwalls():
+                return False
+            return True
+        if direction == 1:
+            if (canmovex, canmovey + self.speed) in Walls.Walls.allwalls():
+                return False
+            return True
+        if direction == 2:
+            if (canmovex - self.speed, canmovey) in Walls.Walls.allwalls():
+                return False
+            return True
+        if direction == 3:
+            if (canmovex + self.speed, canmovey) in Walls.Walls.allwalls():
+                return False
+            return True
     def returnRect(self):
         return self.rect
 

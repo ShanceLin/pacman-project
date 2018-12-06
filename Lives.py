@@ -9,9 +9,19 @@ class livesRemaining(pygame.sprite.Sprite):
         self.rect.y = y
 
     def Vulnerable(self):
+        """
+        Shows a picture of the ghosts for when the ghosts are vulnerable
+        arg: self
+        return: None
+        """
         self.rect.x = 675
         self.rect.y = 50
 
     def resetVul(self):
+        """
+        Hides the ghost icon
+        arg: self
+        return: None
+        """
         self.rect.x = 7000
         self.rect.y = 7000

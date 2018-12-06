@@ -76,45 +76,34 @@ class Controller:
         self.ghostKill = False
         self.colliding = False
 
+        self.fontTitle = pygame.font.SysFont("helvetica", 72)
+        self.fontOther = pygame.font.SysFont("helvectica", 52)
+
+    def gameIntro(self):
+        title = self.fontTitle.render("FOREMAN", True, (0, 0, 0))
+        start = self.fontOther.render("Press ENTER to start", True, (0, 0, 0))
+        instructions = self.fontOther.render("press ARROWKEYS to move", True, (0, 0, 0))
+
+        while not done:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+                if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+                    done = True
+
+            self.scren.fill((15, 9, 119))
+            self.screen.blit(title, (200, 150))
+            self.screen.blit(start, (120, 250))
+            self.screen.blit(instructions, (200, 350))
+
+            pygame.display.flip()
+            self.clock.tick(60)
     def mainLoop(self):
         while True:
             if(self.state == "GAME"):
                 self.gameLoop()
             elif(self.state == "GAMEOVER"):
                 self.gameOver()
-
-    def text_objects(text, font):
-        textSurface = font.render(text, True, black)
-        return textSurface, textSurface.get_rect()
-
-    def messageDisplay(text):
-        largeText = pygame.font.Font('Times New Roman',115)
-        TextSurf, TextRect = text_objects(text, largeText)
-        TextRect.center = ((display_width/2),(display_height/2))
-        gameDisplay.blit(TextSurf, TextRect)
-
-        pygame.display.update()
-
-        time.sleep(2)
-
-        game_loop()
-
-    def gameIntro():
-        intro = True
-        while intro:
-            for event in pygame.event.get():
-                print(event)
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    quit()
-
-            gameDisplay.fill(white)
-            largeText = pygame.font.Font('Times New Roman',115)
-            TextSurf, TextRect = text_objects("FOREMAN", largeText)
-            TextRect.center = ((display_width/2),(display_height/2))
-            gameDisplay.blit(TextSurf, TextRect)
-            pygame.display.update()
-            clock.tick(15)
 
     def gameLoop(self):
         #main loop of game

@@ -16,8 +16,8 @@ import Pellets
 import BigPellets
 import Walls
 import random
-<<<<<<< HEAD
 import Lives
+import random
 
 class Controller:
     def __init__(self, width=750, height=825):
@@ -36,7 +36,7 @@ class Controller:
         ghostspeed = 25
         for k in range(numGhosts):
             x = random.randrange(275, 350)
-            self.ghosts.add(Ghost.Ghost("Ghosts", x, 325, ghostspeed, "assets/carsprite.png"))
+            self.ghosts.add(Ghost.Ghost("Ghosts", x, 325, 25, "assets/carsprite.png"))
         #pelletcount = 0
         self.pellets = pygame.sprite.Group()
 
@@ -127,9 +127,6 @@ class Controller:
                             self.pacman.moveRight()
 
             self.screen.blit(self.background, (0, 0))
-            for g in self.ghosts:
-                if g.isBlue:
-                    g.checkIfBlue()
             getpellet = pygame.sprite.spritecollide(self.pacman, self.pellets, True)
             getBigPellet = pygame.sprite.spritecollide(self.pacman, self.bigpellets, True)
             if getBigPellet:
@@ -146,6 +143,8 @@ class Controller:
                     lives = self.livesRemaining.sprites()
                     lives[0].kill()
                     self.pacman.reset()
+                    for q in self.ghosts:
+                        q.reset()
 
                     self.allSprites.update()
 
@@ -162,11 +161,25 @@ class Controller:
             text_img = self.font.render(text, True, (100, 100, 0))
             self.screen.blit(text_img, (0, 0))
             if getpellet:
-                self.score += 10
+                self.pacman.score += 10
             if getBigPellet:
-                self.score += 100
+                self.pacman.score += 100
 
-            self.ghosts.update()
+
+            self.rando = random.randrange(0,4)
+            for g in self.ghosts:
+                if self.rando == 0:
+                    if g.canMove(0) == True:
+                        g.moveUp()
+                if self.rando == 1:
+                    if g.canMove(1) == True:
+                        g.moveDown()
+                if self.rando == 2:
+                    if g.canMove(2) == True:
+                        g.moveLeft()
+                if self.rando == 3:
+                    if g.canMove(3) == True:
+                        g.moveRight()
             self.screen.blit(self.background, (0, 0))
             if(self.pacman.lives == 0):
                 self.state = "GAMEOVER"

@@ -11,6 +11,7 @@ class Ghost(pygame.sprite.Sprite):
         self.rect.y = y
         self.name = name + str(id(self))
         self.speed = speed
+        self.course = []
         self.isBlue = False
 
     def makeBlue(self):

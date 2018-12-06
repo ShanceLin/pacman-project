@@ -24,6 +24,7 @@ Redesigned version of the classic pacman game featuring beloved computer science
 * final GUI interface
     * ![](introScreen.png)
     * ![](gameScreen.png)
+    * ![](gameOver.png)
 ***        
 
 ## Program Design
@@ -66,9 +67,9 @@ Redesigned version of the classic pacman game featuring beloved computer science
 | 3 | Pressing the down arrow | Pacman character moves down |   |   |
 | 4 | Pressing the left arrow | Pacman character moves left |   |   |
 | 5 | Pressing the right arrow | Pacman character moves right |   |   |
-| 6 | Pacman touches little pellet | The pellet disappears (because pacman “ate” it) and the score increases by 1 |   |   |
-| 7 | Pacman touches big power pellet | The pellet disappears (because pacman “ate” it) and the score increases by 10, also pacman changes color |   |   |
+| 6 | Pacman touches little pellet | The pellet disappears (because pacman “ate” it) and the score increases by 20|   |   |
+| 7 | Pacman touches big power pellet | The pellet disappears (because pacman “ate” it) and the score increases by 110, also pacman changes color |   |   |
 | 8 | Pacman touches ghost | Pacman “dies” and the game ends. “Game Over” is displayed |   |   |
-| 9 | Pacman touches ghost while on power pellet | Ghost disappears because he “dies” and the score increases by 50 |   |   |
+| 9 | Pacman touches ghost while on power pellet | Ghost disappears because he “dies” |   |   |
 | 10 | Pacman touches wall | He is unable to pass the wall because it is a boundary |   |   |
 | 11 | Pacman eats all the pellets | “You win! Next level” prints and the level of the game changes, re-generating the pellets and ghosts |   |   |

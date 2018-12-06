@@ -16,7 +16,10 @@ import Pellets
 import BigPellets
 import Walls
 import random
+<<<<<<< HEAD
 import Lives
+=======
+>>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
 
 class Controller:
     def __init__(self, width=750, height=825):
@@ -69,13 +72,24 @@ class Controller:
         self.ghostKill = False
         self.colliding = False
 
-        self.fontTitle = pygame.font.SysFont("helvetica", 72)
-        self.fontOther = pygame.font.SysFont("helvectica", 52)
+    def mainLoop(self):
+        while True:
+            if(self.state == "GAME"):
+                self.gameLoop()
+            elif(self.state == "GAMEOVER"):
+                self.gameOver()
 
-    def gameIntro(self):
-        title = self.fontTitle.render("FOREMAN", True, (0, 0, 0))
-        start = self.fontOther.render("Press ENTER to start", True, (0, 0, 0))
-        instructions = self.fontOther.render("press ARROWKEYS to move", True, (0, 0, 0))
+    def gameIntro():
+        pygame.init()
+        screen = pygame.display.set_mode((640, 480))
+        clock = pygame.time.Clock()
+        done = False
+
+        fontTitle = pygame.font.SysFont("helvetica", 72)
+        fontOther = pygame.font.SysFont("helvectica", 52)
+        title = fontTitle.render("FOREMAN", True, (0, 0, 0))
+        start = fontOther.render("click X to start", True, (0, 0, 0))
+        instructions = fontOther.render("use ARROWKEYS to move", True, (0, 0, 0))
 
         while not done:
             for event in pygame.event.get():
@@ -84,19 +98,12 @@ class Controller:
                 if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                     done = True
 
-            self.scren.fill((15, 9, 119))
-            self.screen.blit(title, (200, 150))
-            self.screen.blit(start, (120, 250))
-            self.screen.blit(instructions, (200, 350))
-
+            screen.fill((15, 9, 119))
+            screen.blit(title, (200, 150))
+            screen.blit(start, (120, 250))
+            screen.blit(instructions, (200, 350))
             pygame.display.flip()
-            self.clock.tick(60)
-    def mainLoop(self):
-        while True:
-            if(self.state == "GAME"):
-                self.gameLoop()
-            elif(self.state == "GAMEOVER"):
-                self.gameOver()
+            clock.tick(60)
 
     def gameLoop(self):
         #main loop of game
@@ -147,13 +154,29 @@ class Controller:
                 elif self.ghostIsVulnerable == True:
                     self.ghostKill = True
                     print("Ghost died")
+<<<<<<< HEAD
 
             #redraws screen
+=======
+            self.allSprites.draw(self.screen)
+            pygame.display.flip()
+
+            myfont = pygame.font.SysFont(None, 30)
+            text = "%5d Points %2d Lifes" % (0, self.pacman.lives)
+            text_img = self.font.render(text, True, (100, 100, 0))
+            self.screen.blit(text_img, (0, 0))
+            if getpellet:
+                self.score += 10
+            if getBigPellet:
+                self.score += 100
+
+>>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
             self.ghosts.update()
             self.screen.blit(self.background, (0, 0))
             if(self.pacman.lives == 0):
                 self.state = "GAMEOVER"
 
+<<<<<<< HEAD
             #displays score
             myfont = pygame.font.SysFont(None, 30)
             text = myfont.render('SCORE: ', True, (0,0,0))
@@ -166,6 +189,8 @@ class Controller:
             self.allSprites.draw(self.screen)
             pygame.display.flip()
 
+=======
+>>>>>>> 06226d161ac5a307da810bb07a0c1cd6dbc7b8da
     def gameOver(self):
         self.pacman.kill()
         myfont = pygame.font.SysFont(None, 30)

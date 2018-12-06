@@ -16,7 +16,6 @@ import Pellets
 import BigPellets
 import Walls
 import random
-<<<<<<< HEAD
 import Lives
 
 class Controller:
